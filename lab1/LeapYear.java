@@ -19,7 +19,7 @@ public class LeapYear {
     *
     */
 
-    private static boolean isLeapYear(int year) {
+    public static boolean isLeapYear(int year) {
         if (year % 400 == 0) {
             return true;
         }
