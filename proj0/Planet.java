@@ -89,4 +89,18 @@ public class Planet {
 		}
 		return netForecByY;
 	}
+
+	/** updates the planets position
+	*/
+
+	public void update (double dt, double fX, double fY) {
+		double aX = fX/mass;
+		double aY = fY/mass;
+
+		xxVel += dt * aX;
+		yyVel += dt * aY;
+
+		xxPos += dt * xxVel;
+		yyPos += dt * yyVel;
+	}
 }
