@@ -51,6 +51,7 @@ public class Planet {
 	public double calcForceExertedByX (Planet p) {
 		double forceByX;
 		double distance = calcDistance(p);
+		if (distance == 0) return 0;
 		double force = this.calcForceExertedBy(p);
 		forceByX = force * (p.xxPos - xxPos) / distance;
 		return forceByX; 
@@ -62,14 +63,30 @@ public class Planet {
 	public double calcForceExertedByY (Planet p) {
 		double forceByY;
 		double distance = calcDistance(p);
+		if (distance == 0) return 0;
 		double force = this.calcForceExertedBy(p);
 		forceByY = force * (p.yyPos - yyPos) / distance;
 		return forceByY; 
 	}
 
-	/** calculates the net X, Y force exerted by all planets in the given array
+	/** calculates the net X force exerted by all planets in the given array
 	*/
 	public double calcNetForceExertedByX (Planet[] allPlanets) {
-		
+		double netForecByX = 0;
+		for (Planet p : allPlanets) {
+			netForecByX += calcForceExertedByX(p);
+		}
+		return netForecByX;
+	}
+
+
+		/** calculates the net X force exerted by all planets in the given array
+	*/
+	public double calcNetForceExertedByY (Planet[] allPlanets) {
+		double netForecByY = 0;
+		for (Planet p : allPlanets) {
+			netForecByY += calcForceExertedByY(p);
+		}
+		return netForecByY;
 	}
 }
