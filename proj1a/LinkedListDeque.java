@@ -42,7 +42,7 @@ public class LinkedListDeque<T> {
 
     /** checks if the list is empty. */
     public boolean isEmpty() {
-        return size == 0 ? ;
+        return size == 0 ;
     }
 
     /** gets the size of the list. */
