@@ -52,6 +52,7 @@ public class ArrayDeque<T> {
         }
     }
 
+    /** Adds item to the front of the list. */
     public void addFirst(T item) {
         ensureCapacityMax();
         items[minusOne(nextFirst)] = item;
@@ -59,6 +60,7 @@ public class ArrayDeque<T> {
         size++;
     }
 
+    /** Adds item to the end of the list. */
     public void addLast(T item) {
         ensureCapacityMax();
         items[nextLast] = item;
@@ -66,13 +68,19 @@ public class ArrayDeque<T> {
         size++;
     }
 
+    /** Returns true if deque is empty. */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /** Returns the number of items in the deque. */
     public int size() {
         return size;
     }
+
+    /** Print all the items in the deque from front to end,
+     *  seperated by a space.
+     */
 
     public void printDeque() {
         for (int i = 1; i <= size; i++) {
@@ -80,6 +88,7 @@ public class ArrayDeque<T> {
         }
     }
 
+    /** Removes and returns the item at the front of the deque. */
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -91,6 +100,9 @@ public class ArrayDeque<T> {
         return val;
     }
 
+    /** Removes and returns the item at the end of the deque.
+     *  If no such item exists, returns null.
+     * */
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -102,6 +114,7 @@ public class ArrayDeque<T> {
         return val;
     }
 
+    /** Gets the item at the given index. */
     public T get(int index) {
         if (index < 0 || index >= size) {
             return null;
