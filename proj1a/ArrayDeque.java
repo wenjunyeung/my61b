@@ -18,38 +18,36 @@ public class ArrayDeque<T> {
         size = 1;
     }
     */
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] copy = (T[]) new Object[capacity];
-        if(nextFirst < nextLast) {
+        if (nextFirst < nextLast) {
             System.arraycopy(items, nextFirst, copy, 0, size);
-        }
-        else {
+        } else {
             System.arraycopy(items, nextFirst, copy, 0, items.length - nextFirst);
             System.arraycopy(items, 0, copy, items.length - nextFirst, nextLast);
         }
         items = copy;
         nextFirst = 0;
-        nextLast = size == capacity? 0 : size;
+        nextLast = size == capacity ? 0 : size;
 
     }
 
     private void ensureCapacityMax() {
         if (size == items.length) {
-            resize(2*items.length);
+            resize(2 * items.length);
         }
     }
 
     private void ensureCapacityMin() {
-        if (size < 1/4 * items.length) {
-            resize(1/2 * items.length);
+        if (size <= items.length / 4) {
+            resize(items.length / 2);
         }
     }
 
     private int minusOne(int index) {
         if (index - 1 < 0) {
             return index - 1 + items.length;
-        }
-        else {
+        } else {
             return index - 1;
         }
     }
@@ -77,13 +75,15 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for(int i = 1; i <= size; i++) {
+        for (int i = 1; i <= size; i++) {
             System.out.print(items[(nextFirst + i) % 8] + " ");
         }
     }
 
     public T removeFirst() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         ensureCapacityMin();
         T val = items[nextFirst];
         nextFirst = (nextFirst + 1) % items.length;
@@ -92,7 +92,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         ensureCapacityMin();
         T val = items[minusOne(nextLast)];
         nextLast = minusOne(nextLast);
@@ -101,7 +103,9 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if(index < 0 || index >= items.length) return null;
+        if (index < 0 || index >= size) {
+            return null;
+        }
         return items[(nextFirst + index)];
     }
 }

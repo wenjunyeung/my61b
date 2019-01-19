@@ -34,7 +34,7 @@ public class LinkedListDeque<T> {
     public void addFirst(T item) {
         sentinel.next = new Node(item, sentinel, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
-        if(size == 0) {
+        if (size == 0) {
             sentinel.prev = sentinel.next;
         }
         size += 1;
@@ -48,7 +48,7 @@ public class LinkedListDeque<T> {
 
     /** checks if the list is empty. */
     public boolean isEmpty() {
-        return size == 0 ;
+        return size == 0;
     }
 
     /** gets the size of the list. */
@@ -60,7 +60,7 @@ public class LinkedListDeque<T> {
     /** prints the list. */
     public void printDeque() {
         Node p = sentinel.next;
-        while(p!=sentinel) {
+        while (p != sentinel) {
             System.out.print(p.item + " ");
             p = p.next;
         }
@@ -69,7 +69,9 @@ public class LinkedListDeque<T> {
 
     /**  removes the first item from the list. */
     public T removeFirst() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
 
         T val = sentinel.next.item;
         Node n = sentinel.next;
@@ -82,8 +84,9 @@ public class LinkedListDeque<T> {
 
     /** removes the last item from the list. */
     public T removeLast() {
-        if (size == 0) return null;
-
+        if (size == 0) {
+            return null;
+        }
         T val = sentinel.prev.item;
         Node n = sentinel.prev;
         sentinel.prev.prev.next = sentinel;
@@ -96,8 +99,8 @@ public class LinkedListDeque<T> {
     /** gets the ith item from the list using iteration. */
     public T get(int index) {
         Node p = sentinel.next;
-        for(int i = 0; i < index; i++) {
-            if(p.next == sentinel) {
+        for (int i = 0; i < index; i++) {
+            if (p.next == sentinel) {
                 return null;
             }
             p = p.next;
@@ -105,15 +108,17 @@ public class LinkedListDeque<T> {
         return p.item;
     }
 
-    private T getRecursiveHelper (Node n, int index) {
+    private T getRecursiveHelper(Node n, int index) {
         if (index == 0) {
             return n.item;
         }
-        return getRecursiveHelper(n.next, index -1);
+        return getRecursiveHelper(n.next, index - 1);
     }
     /** gets the ith item from the list using recursion. */
     public T getRecursive(int index) {
-        if(index < 0 || index > size - 1) return null;
+        if (index < 0 || index > size - 1) {
+            return null;
+        }
         return getRecursiveHelper(sentinel.next, index);
     }
 }
