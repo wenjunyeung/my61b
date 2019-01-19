@@ -59,6 +59,12 @@ public class ArrayDequeTest {
         ad1.addLast(1);
         ad1.addFirst(2);
         ad1.addLast(3);
+        ad1.addLast(1);
+        ad1.addFirst(2);
+        ad1.addLast(3);
+        ad1.addLast(1);
+        ad1.addFirst(2);
+        ad1.addLast(3);
         // should not be empty
         //	passed = checkEmpty(false, lld1.isEmpty()) && passed;
 

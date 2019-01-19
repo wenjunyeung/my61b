@@ -5,7 +5,7 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         items = (T[]) new Object[8];
         nextFirst = 0;
-        nextLast = 1;
+        nextLast = 0;
         size = 0;
     }
 
@@ -18,15 +18,53 @@ public class ArrayDeque<T> {
         size = 1;
     }
     */
+    public void resize(int capacity) {
+        T[] copy = (T[]) new Object[capacity];
+        if(nextFirst < nextLast) {
+            System.arraycopy(items, nextFirst, copy, 0, size);
+        }
+        else {
+            System.arraycopy(items, nextFirst, copy, 0, items.length - nextFirst);
+            System.arraycopy(items, 0, copy, items.length - nextFirst, nextLast);
+        }
+        items = copy;
+        nextFirst = 0;
+        nextLast = size == capacity? 0 : size;
+
+    }
+
+    private void ensureCapacityMax() {
+        if (size == items.length) {
+            resize(2*items.length);
+        }
+    }
+
+    private void ensureCapacityMin() {
+        if (size < 1/4 * items.length) {
+            resize(1/2 * items.length);
+        }
+    }
+
+    private int minusOne(int index) {
+        if (index - 1 < 0) {
+            return index - 1 + items.length;
+        }
+        else {
+            return index - 1;
+        }
+    }
+
     public void addFirst(T item) {
-        items[nextFirst] = item;
-        nextFirst = (nextFirst - 1) < 0 ? nextFirst + 7 : nextFirst - 1;
+        ensureCapacityMax();
+        items[minusOne(nextFirst)] = item;
+        nextFirst = minusOne(nextFirst);
         size++;
     }
 
     public void addLast(T item) {
+        ensureCapacityMax();
         items[nextLast] = item;
-        nextLast = (nextLast + 1) > 7 ? nextLast - 7 : nextLast + 1;
+        nextLast = (nextLast + 1) % items.length;
         size++;
     }
 
@@ -46,22 +84,24 @@ public class ArrayDeque<T> {
 
     public T removeFirst() {
         if (size == 0) return null;
-        T val = items[(nextFirst + 1) % 8];
-        nextFirst = (nextFirst + 1) % 8;
+        ensureCapacityMin();
+        T val = items[nextFirst];
+        nextFirst = (nextFirst + 1) % items.length;
         size--;
         return val;
     }
 
     public T removeLast() {
         if (size == 0) return null;
-        T val = items[(nextLast - 1) < 0? nextLast + 7 : nextLast - 1];
-        nextLast = (nextLast - 1) < 0? nextLast + 7 : nextLast - 1;
+        ensureCapacityMin();
+        T val = items[minusOne(nextLast)];
+        nextLast = minusOne(nextLast);
         size--;
         return val;
     }
 
     public T get(int index) {
-        if(index < 0 || index > 7) return null;
-        return items[(nextFirst + 1 + index) % 8];
+        if(index < 0 || index >= items.length) return null;
+        return items[(nextFirst + index)];
     }
 }
