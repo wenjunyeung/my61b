@@ -4,6 +4,8 @@ public class ArrayDeque<T> {
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
+        nextFirst = 0;
+        nextLast = 1;
         size = 0;
     }
 
@@ -25,11 +27,11 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         items[nextLast] = item;
         nextLast = (nextLast + 1) > 7 ? nextLast - 7 : nextLast + 1;
-        size--;
+        size++;
     }
 
     public boolean isEmpty() {
-        return size == 0 ;
+        return size == 0;
     }
 
     public int size() {
@@ -43,6 +45,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) return null;
         T val = items[(nextFirst + 1) % 8];
         nextFirst = (nextFirst + 1) % 8;
         size--;
@@ -50,6 +53,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) return null;
         T val = items[(nextLast - 1) < 0? nextLast + 7 : nextLast - 1];
         nextLast = (nextLast - 1) < 0? nextLast + 7 : nextLast - 1;
         size--;
@@ -57,6 +61,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
+        if(index < 0 || index > 7) return null;
         return items[(nextFirst + 1 + index) % 8];
     }
 }
