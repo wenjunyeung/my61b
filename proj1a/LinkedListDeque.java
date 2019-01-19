@@ -30,7 +30,10 @@ public class LinkedListDeque<T> {
     /** Adds item to the front of the list. */
     public void addFirst(T item) {
         sentinel.next = new Node(item, sentinel, sentinel.next);
-        sentinel.prev = sentinel.next;
+        sentinel.next.next.prev = sentinel.next;
+        if(size == 0) {
+            sentinel.prev = sentinel.next;
+        }
         size += 1;
     }
     /** Adds item to the end of the list. */
@@ -63,7 +66,7 @@ public class LinkedListDeque<T> {
 
     /**  removes the first item from the list. */
     public T removeFirst() {
-        T val = sentinel.item;
+        T val = sentinel.next.item;
         Node n = sentinel.next;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
