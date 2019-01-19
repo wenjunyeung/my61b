@@ -79,7 +79,7 @@ public class LinkedListDequeTest {
 		// should not be empty 
 	//	passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
-		System.out.print(lld1.removeLast());
+		System.out.print(lld1.getRecursive(1));
 		// should be empty 
 	//	passed = checkEmpty(true, lld1.isEmpty()) && passed;
 

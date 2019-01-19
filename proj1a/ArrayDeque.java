@@ -1,12 +1,13 @@
 public class ArrayDeque<T> {
-    T[] items;
-    int size, nextFirst, nextLast;
+    private T[] items;
+    private int size, nextFirst, nextLast;
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
     }
 
+    /*
     public ArrayDeque(T t) {
         items = (T[]) new Object[8];
         nextFirst = 0;
@@ -14,7 +15,7 @@ public class ArrayDeque<T> {
         items[1] = t;
         size = 1;
     }
-
+    */
     public void addFirst(T item) {
         items[nextFirst] = item;
         nextFirst = (nextFirst - 1) < 0 ? nextFirst + 7 : nextFirst - 1;
