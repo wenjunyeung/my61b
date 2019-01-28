@@ -15,7 +15,7 @@ public class TestPalindrome {
         for (int i = 0; i < "persiflage".length(); i++) {
             actual += d.removeFirst();
         }
-        assertEquals("egalfisrep", actual);
+        assertEquals("persiflage", actual);
     }
 
     @Test

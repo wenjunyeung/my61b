@@ -2,11 +2,11 @@ public class Palindrome {
 
     public Deque<Character> wordToDeque(String word) {
         Deque<Character> res = new LinkedListDeque<>();
-        if(word.length() == 0) {
+        if (word.length() == 0) {
             return res;
         }
-        for(int i = 0; i < word.length(); i++) {
-            res.addFirst(word.charAt(i));
+        for (int i = 0; i < word.length(); i++) {
+            res.addLast(word.charAt(i));
         }
         return res;
     }
@@ -21,10 +21,10 @@ public class Palindrome {
     }
 
     private boolean isPalindromeHelper(Deque deque) {
-        if(deque.size() <= 1) {
+        if (deque.size() <= 1) {
             return true;
         }
-        if(deque.removeFirst() != deque.removeLast()) {
+        if (deque.removeFirst() != deque.removeLast()) {
             return false;
         }
         return isPalindromeHelper(deque);
@@ -36,10 +36,10 @@ public class Palindrome {
     }
 
     private boolean isPalindromeHelper(Deque deque, CharacterComparator cc) {
-        if(deque.size() <= 1) {
+        if (deque.size() <= 1) {
             return true;
         }
-        if(!cc.equalChars((char) deque.removeFirst(), (char) deque.removeLast())) {
+        if (!cc.equalChars((char) deque.removeFirst(), (char) deque.removeLast())) {
             return false;
         }
         return isPalindromeHelper(deque, cc);
